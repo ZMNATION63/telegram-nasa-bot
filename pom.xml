@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.1</version>
-		<relativePath/>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pro.careeerdevelopment</groupId>
 	<artifactId>telegram-bot-nasa</artifactId>
@@ -14,18 +14,18 @@
 	<name>telegram-bot-nasa</name>
 	<description>Nasa telegram bot</description>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<javax.el.version>3.0.0</javax.el.version>
-		<maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
-		<maven.compiler.release>11</maven.compiler.release>
-		<lombok.version>1.18.26</lombok.version>
+		<testcontainers.version>1.17.4</testcontainers.version>
 		<jackson.version>2.13.3</jackson.version>
 		<json.version>20220924</json.version>
-		<testcontainers.version>1.17.4</testcontainers.version>
 		<telegrambots.version>6.5.0</telegrambots.version>
+		<lombok.version>1.18.26</lombok.version>
 		<hibernate.javax.version>1.0.0.Final</hibernate.javax.version>
 		<hibernate.version>6.1.5.Final</hibernate.version>
+		<maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 
 	<dependencies>

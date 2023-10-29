@@ -24,7 +24,7 @@ public class ItemListService {
         List<LinksItem> linksItemList = new ArrayList<>();
         resultList = resultList.stream()
             .peek(s -> StringUtils.substring(s, 1,s.length() - 1))
-            .filter(s -> s.matches("(.*)~orig.(.*)"))
+            .filter(s -> s.matches("(.*)~medium.jpg(.*)"))
             .peek(s -> s = s.replace(" ", "%20"))
             .peek(s -> linksItemList.add(new LinksItem(s)))
             .collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class ItemListService {
         List<String> linksToEntityStr = new ArrayList<>();
         resultList = resultList.stream()
             .peek(s -> StringUtils.substring(s, 1,s.length() - 1))
-            .filter(s -> s.matches("(.*)~orig.(.*)"))
+            .filter(s -> s.matches("(.*)~medium.jpg(.*)"))
             .peek(s -> s = s.replace(" ", "%20"))
 //            .peek(s -> s)
             .collect(Collectors.toList());

@@ -31,25 +31,25 @@ public class NasaEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger id;
 
-    @Column(name = "href", length = 1024)
+    @Column(name = "href", length = 4096)
     private String href;
 
-    @Column(name = "description", length = 4096)
+    @Column(name = "description", length = 8192)
     private String description;
 
-    @Column(name = "title")
+    @Column(name = "title", length = 2048)
     private String title;
 
-    @Column(name = "nasaId")
+    @Column(name = "nasaId", length = 1024)
     private String nasaId;
 
-    @Column(name = "dateCreated")
+    @Column(name = "dateCreated", length = 512)
     private String dateCreated;
 
-    @Column(name = "mediaType")
+    @Column(name = "mediaType", length = 512)
     private String mediaType;
 
-    @Column(name = "center")
+    @Column(name = "center", length = 1024)
     private String center;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

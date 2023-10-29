@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -30,12 +31,13 @@ public class KeyWordsEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger kyeWords_id;
 
-    private String keywords;
+    @Column(name = "key_Words", length = 512)
+    private String keyWords;
 
     @ManyToOne(optional = false)
     @JoinTable(
         name="NasaEntity_KeyWordsEntity",
-        joinColumns = @jakarta.persistence.JoinColumn( name="kyeWords_id"),
+        joinColumns = @JoinColumn( name="kyeWords_id"),
         inverseJoinColumns = @JoinColumn( name="id")
     )
     private NasaEntity nasaEntityKey;

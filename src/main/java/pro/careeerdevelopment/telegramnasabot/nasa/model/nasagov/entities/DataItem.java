@@ -21,8 +21,6 @@ public class DataItem {
     private String photographer;
     private String location;
     private String nasa_id;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss:SS'Z'", locale = "Locale.ENGLISH")
     private String date_created;
     private List<String> keywords;
     private String media_type;

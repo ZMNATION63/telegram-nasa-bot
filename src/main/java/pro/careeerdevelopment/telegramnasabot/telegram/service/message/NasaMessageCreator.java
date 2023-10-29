@@ -11,7 +11,7 @@ import java.util.Random;
 @Component
 public class NasaMessageCreator {
 
-    private NasaEntityService nasaEntityService;
+    private final NasaEntityService nasaEntityService;
 
     @Autowired
     public NasaMessageCreator(NasaEntityService nasaEntityService) {
@@ -23,13 +23,11 @@ public class NasaMessageCreator {
         Random random = new Random();
         int index = random.nextInt(nasaEntityList.size());
         NasaEntity nasaEntity = nasaEntityList.get(index);
-        String s = "||Field||Value||\n" + "|*Declarative decomposition*|Enable|\n" + "|*Existence condition*|TRUE|\n"
-            + "|*Modify condition*|OrderAim in (Modify)|";
         return nasaEntity.getTitle()
-            + "\nNasa ID " +  nasaEntity.getNasaId()
-            + "\nDate creation " + nasaEntity.getDateCreated()
+            + "\nNasa ID: " +  nasaEntity.getNasaId()
+            + "\nDate creation: " + nasaEntity.getDateCreated().substring(0,10)
             + "\n"
-            + "\nDescryption " + nasaEntity.getDescription()
+            + "\nDescryption: " + nasaEntity.getDescription()
             + "\n"
             + "\n " + nasaEntity.getNasaEntityLinks().get(0).getLinks().get(0).replace("\"", "");
     }

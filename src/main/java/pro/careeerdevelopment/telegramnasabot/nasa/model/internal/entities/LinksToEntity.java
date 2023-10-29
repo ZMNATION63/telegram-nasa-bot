@@ -1,12 +1,6 @@
 package pro.careeerdevelopment.telegramnasabot.nasa.model.internal.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,12 +24,14 @@ public class LinksToEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger linksId;
+
+    @Column( length = 8192)
     private List<String> links;
 
     @ManyToOne(optional = false)
     @JoinTable(
         name="NasaEntity_LinksToEntity",
-        joinColumns = @jakarta.persistence.JoinColumn( name="linksId"),
+        joinColumns = @JoinColumn( name="linksId"),
         inverseJoinColumns = @JoinColumn( name="id")
     )
     private NasaEntity nasaEntityLinks;
