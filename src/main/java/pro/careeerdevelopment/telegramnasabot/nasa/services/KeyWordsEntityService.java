@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class KeyWordsEntityService {
-    private KeyWordsEntityDao keyWordsEntityDao;
+    private final KeyWordsEntityDao keyWordsEntityDao;
 
     @Autowired
     public KeyWordsEntityService(KeyWordsEntityDao keyWordsEntityDao) {
@@ -23,18 +23,19 @@ public class KeyWordsEntityService {
 //        return keyWordsEntityDao.findAllByNasaEntityId(id);
 //    }
 
+
     @Transactional
-    List<KeyWordsEntity> findAll() {
+    public List<KeyWordsEntity> findAll() {
         return keyWordsEntityDao.findAll();
-    };
+    }
 
     @Transactional
-    <S extends KeyWordsEntity> S save(S entity) {
+    public <S extends KeyWordsEntity> S save(S entity) {
         return keyWordsEntityDao.save(entity);
-    };
+    }
 
     @Transactional
-    KeyWordsEntity findById(BigInteger id) {
+    public KeyWordsEntity findById(BigInteger id) {
         return keyWordsEntityDao.findById(id).isPresent() ? keyWordsEntityDao.findById(id).get() : null;
-    };
+    }
 }

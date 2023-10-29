@@ -7,12 +7,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class HttpClientExecutor {
-    public static String getHttpResponse(String path) throws IOException {
+    public static String getHttpResponse(String path) {
 
         DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
         HttpGet httppost = new HttpGet(path);
@@ -26,23 +25,24 @@ public class HttpClientExecutor {
             HttpEntity entity = response.getEntity();
 
             inputStream = entity.getContent();
-            // json is UTF-8 by default
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
             StringBuilder sb = new StringBuilder();
 
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
             result = sb.toString();
             System.out.println(result);
         } catch (Exception e) {
-            // Oops
+
         } finally {
             try {
                 if (inputStream != null)
                     inputStream.close();
             } catch (Exception squish) {
+
             }
         }
         return result;

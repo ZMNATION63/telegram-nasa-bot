@@ -13,7 +13,7 @@ import java.util.Optional;
 @Component
 public class NasaEntityService{
 
-    private NasaEntityDao nasaEntityDao;
+    private final NasaEntityDao nasaEntityDao;
 
     @Autowired
     public NasaEntityService(NasaEntityDao nasaEntityDao) {
@@ -33,10 +33,10 @@ public class NasaEntityService{
     @Transactional
     public List<NasaEntity> findAll() {
         return nasaEntityDao.findAll();
-    };
+    }
 
     @Transactional
-    Optional<NasaEntity> findById(BigInteger bigInteger) {
+    public Optional<NasaEntity> findById(BigInteger bigInteger) {
         return nasaEntityDao.findById(bigInteger);
     }
 }

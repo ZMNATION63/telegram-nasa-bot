@@ -15,7 +15,6 @@ import pro.careeerdevelopment.telegramnasabot.nasa.services.NasaEntityService;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 @Component
 public class NasaEntityController {
 
-    private NasaEntityService nasaEntityService;
+    private final NasaEntityService nasaEntityService;
 
     @Autowired
     public NasaEntityController(NasaEntityService nasaEntityDao) {
@@ -38,8 +37,6 @@ public class NasaEntityController {
     public void uploadNasaEntities(String resultStr) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Root collectionNasa = objectMapper.readValue(resultStr.getBytes(), Root.class);
-        NasaEntity nasaEntity = new NasaEntity();
-        List<NasaEntity> nasaEntityList = new ArrayList<>();
         for (Item item : collectionNasa.getCollection().getItems()) {
             NasaEntity nasaEntityTemp = new NasaEntity();
             if (StringUtils.isNotBlank(item.getHref())) {
@@ -57,7 +54,7 @@ public class NasaEntityController {
                 Set<KeyWordsEntity> keyWordsEntityList1 = new HashSet<>();
                 for (String s : item.getData().get(0).getKeywords()) {
                     KeyWordsEntity keyWordsEntity = new KeyWordsEntity();
-                    keyWordsEntity.setKeywords(s);
+                    keyWordsEntity.setKeyWords(s);
                     keyWordsEntityList1.add(keyWordsEntity);
                     keyWordsEntity.setNasaEntityKey(nasaEntityTemp);
                 }
@@ -65,15 +62,19 @@ public class NasaEntityController {
             }
 
             nasaEntityTemp.setNumberOfPlays(BigInteger.valueOf(0L));
-            String urlFinal = item.getHref();
+            String urlFinal = item.getHref().replace(" ", "%20");
             List<LinksItem> linkItemHrefList = ItemListService.getContentLinks(urlFinal);
-            List<String> someLinks = linkItemHrefList.stream().map(l -> l.getHref()).collect(Collectors.toList());
+            List<String> someLinks = linkItemHrefList.stream()
+                .map(LinksItem::getHref)
+                .map(s -> s.replace(" ", "%20"))
+                .collect(Collectors.toList());
 
             List<LinksToEntity> linksToEntityListString =
-                linkItemHrefList.stream().map(l -> new LinksToEntity(someLinks)).collect(Collectors.toList());
+                linkItemHrefList.stream()
+                    .map(l -> new LinksToEntity(someLinks))
+                    .collect(Collectors.toList());
 
             nasaEntityTemp.setNasaEntityLinks(linksToEntityListString);
-            nasaEntityList.add(nasaEntityTemp);
             nasaEntityService.save(nasaEntityTemp);
         }
     }
